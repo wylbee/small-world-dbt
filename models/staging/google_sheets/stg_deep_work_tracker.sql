@@ -2,7 +2,7 @@ with
 
 raw_data as (
 
-    select * from {{ source('google_sheets', 'dw_log') }}
+    select * from {{ source('raw_google_sheets_deep_work_tracker', 'dw_log') }}
 
 ),
 
