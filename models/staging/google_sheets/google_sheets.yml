@@ -1,12 +1,16 @@
 version: 2
 
 models:
-    - name: my_first_dbt_model
-      description: "A starter dbt model"
+    - name: stg_deep_work_tracker
+      description: Google sheet log of deep work hours. Grain is an activity. There can be multiple activities during a day.
       columns:
-          - name: id
-            description: "The primary key for this table"
+          - name: tracker_activity_id
+            description: Primary Key
             tests:
                 - unique
                 - not_null
 
+sources:
+  - name: google_sheets
+    tables:
+      - name: dw_log
