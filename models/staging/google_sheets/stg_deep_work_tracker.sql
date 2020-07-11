@@ -19,7 +19,7 @@ cleaned as (
         type as activity_type,
         subtype as activity_subtype,
         minutes as activity_minutes,
-        date as activity_date,
+        to_date(date, 'YYYY-MM-DD') as activity_date,
 
         _sdc_batched_at as el_batched_at,
         _sdc_extracted_at as el_extracted_at,

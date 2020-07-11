@@ -1,0 +1,11 @@
+version: 2
+
+models:
+    - name: fct_deep_work_tracker
+      description: Fact table of deep work tracking.
+      columns:
+          - name: tracker_activity_id
+            description: Primary Key
+            tests:
+                - unique
+                - not_null
