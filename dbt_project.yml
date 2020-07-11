@@ -33,5 +33,11 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 models:
   small_world_analytics:
+      materialized: view
+      mart:
+        quantified_self:
+            schema: mart_quantified_self
       staging:
-          materialized: view
+        google_sheets:
+            schema: stg_google_sheets
+          
