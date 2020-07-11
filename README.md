@@ -1,15 +1,3 @@
-Welcome to your new dbt project!
+This database contains the Transform logic used in the Extract, Load, and Transform process powering the (Small World Analytics site)[http://smallworldanalytics.com/]. 
 
-### Using the starter project
-
-Try running the following commands:
-- dbt run
-- dbt test
-
-
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](http://slack.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+A future write up will spell our how it is utilized.

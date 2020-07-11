@@ -1,0 +1,16 @@
+version: 2
+
+models:
+    - name: stg_deep_work_tracker
+      description: Google sheet log of deep work hours. Grain is an activity. There can be multiple activities during a day.
+      columns:
+          - name: tracker_activity_id
+            description: Primary Key
+            tests:
+                - unique
+                - not_null
+
+sources:
+  - name: raw_google_sheets_deep_work_tracker
+    tables:
+      - name: dw_log
