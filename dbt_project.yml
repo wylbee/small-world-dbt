@@ -42,4 +42,7 @@ models:
           schema: stg_google_sheets
         trello: 
           schema: stg_trello
+
+seeds:
+  schema: seeds
           
