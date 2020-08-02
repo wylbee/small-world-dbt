@@ -9,3 +9,11 @@ models:
             tests:
                 - unique
                 - not_null
+    - name: fct_kanban_activity
+      description: Fact table that represents state changes on the Personal Kanban board. Used to track Kanban & Lean system health metrics.
+      columns:
+          - name: action_id
+            description: Primary Key
+            tests:
+                - unique
+                - not_null
