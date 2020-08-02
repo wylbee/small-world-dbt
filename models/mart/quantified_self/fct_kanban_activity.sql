@@ -35,6 +35,21 @@ add_columns as (
         actions.list_id is not null and 
         actions.board_name = 'Personal Kanban'
 
+),
+
+add_start_end as (
+
+    select 
+        *,
+
+        action_date as start_date,
+
+        lead(action_date, 1, current_timestamp) over (
+            partition by card_id
+            order by action_date
+        ) as end_date
+    
+    from add_columns
 )
 
-select * from add_columns
+select * from add_start_end
