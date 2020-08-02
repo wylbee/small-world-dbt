@@ -23,7 +23,7 @@ cleaned as (
         data__card__name as card_name,
         type as action_type,
 
-        date as action_date,
+        to_timestamp(date, 'YYYY-MM-DD HH24:MI:SS') as action_date,
 
         _sdc_batched_at as el_batched_at,
         _sdc_received_at as el_recieved_at,
