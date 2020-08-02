@@ -23,7 +23,6 @@ cleaned as (
         data__card__name as card_name,
         type as action_type,
 
-        
         date as action_date,
 
         _sdc_batched_at as el_batched_at,
@@ -40,8 +39,7 @@ filtered as (
     select * from cleaned 
 
     where 
-        board_id = '5b742ee2bdf40b08536e560e' and 
-        action_date >= '2020-07-09'
+        board_id = '5b742ee2bdf40b08536e560e'
 
 )
 
