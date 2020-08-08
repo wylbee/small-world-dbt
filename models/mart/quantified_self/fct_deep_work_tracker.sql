@@ -16,8 +16,13 @@ final as (
         activity_subtype,
         activity_minutes,
         activity_date,
+        
         extract('week' from activity_date) as activity_week_number,
-        extract(dow from activity_date) activity_weekday
+        
+        case 
+            when extract(dow from activity_date) = 0 then 7
+            else extract(dow from activity_date) 
+        end as activity_weekday
     
     from activities
 
