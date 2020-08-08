@@ -23,9 +23,14 @@ add_columns as (
         actions.card_name,
 
         case
-            when is_archived then 'Archived'
+            when actions.is_archived then 'Archived'
             else coalesce(column_mapping.cleaned, actions.to_list_name, actions.list_name) 
         end as column_name,
+
+        case 
+            when actions.is_archived then 7
+            else column_mapping.hierarchy
+        end as hierarchy,
 
         actions.action_date
 

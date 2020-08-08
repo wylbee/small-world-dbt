@@ -30,7 +30,8 @@ joined as (
         spine.date_minute,
         filtered.card_id,
         filtered.card_name,
-        filtered.column_name
+        filtered.column_name,
+        filtered.hierarchy
     
     from spine
 
