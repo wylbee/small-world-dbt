@@ -17,5 +17,5 @@ models:
             tests:
                 - unique
                 - not_null
-    - name: kanban_columns_by_minute
+    - name: kanban_column_status_by_minute
       description: Record kanban column activity by minute. Grain is a card by minute.
