@@ -23,6 +23,8 @@ cleaned as (
         data__card__name as card_name,
         type as action_type,
 
+        data__card__closed as is_archived,
+
         to_timestamp(date, 'YYYY-MM-DD HH24:MI:SS') as action_date,
 
         _sdc_batched_at as el_batched_at,

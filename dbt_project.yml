@@ -42,6 +42,8 @@ models:
           schema: stg_google_sheets
         trello: 
           schema: stg_trello
+        utils:
+          schema: utils
 
 seeds:
   schema: seeds

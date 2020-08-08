@@ -22,17 +22,20 @@ add_columns as (
 
         actions.card_name,
 
-        coalesce(column_mapping.cleaned, actions.list_name) as column_name,
+        case
+            when is_archived then 'Archived'
+            else coalesce(column_mapping.cleaned, actions.to_list_name, actions.list_name) 
+        end as column_name,
 
         actions.action_date
 
     from actions 
 
     left outer join column_mapping
-        on actions.list_name = column_mapping.actual
+        on coalesce(actions.list_name, actions.to_list_name) = column_mapping.actual
 
     where 
-        actions.list_id is not null and 
+        (coalesce(actions.list_id, actions.to_list_id) is not null or is_archived) and 
         actions.board_name = 'Personal Kanban'
 
 ),
