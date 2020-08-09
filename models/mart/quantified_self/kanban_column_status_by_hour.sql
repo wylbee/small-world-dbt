@@ -20,7 +20,8 @@ filtered as (
     
     where 
         column_name is not null and 
-        card_name is not null
+        card_name is not null and 
+        column_name != '[Resources]'
 
 ),
 
