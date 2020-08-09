@@ -10,7 +10,7 @@ activity as (
 
 spine as (
 
-    select * from {{ ref('minute_date_spine') }}
+    select * from {{ ref('hour_date_spine') }}
 
 ),
 
@@ -27,7 +27,7 @@ filtered as (
 joined as (
 
     select 
-        spine.date_minute,
+        spine.date_hour,
         filtered.card_id,
         filtered.card_name,
         filtered.column_name,
@@ -37,8 +37,8 @@ joined as (
 
     inner join filtered
         on 
-            spine.date_minute >= filtered.start_date and 
-            spine.date_minute <= filtered.end_date
+            spine.date_hour >= filtered.start_date and 
+            spine.date_hour <= filtered.end_date
 
 )
 
