@@ -33,7 +33,7 @@ select_records as (
             order by
                 date_hour asc nulls last
         ) = 1 as is_first_record_of_day
-    
+  
     from hourly_status
 
 ),
@@ -48,6 +48,7 @@ joined as (
                 when select_records.is_arrival_record then   select_records.card_id
             end 
         ) as num_arrivals,
+
         
         count(
             case 
@@ -57,7 +58,7 @@ joined as (
                     then select_records.card_id
             end
         ) as num_inventory
-    
+
     from spine
 
     left outer join select_records
@@ -65,6 +66,31 @@ joined as (
 
     group by 1
 
+),
+
+final as (
+
+    select 
+        *,
+
+        avg(num_arrivals) over (
+            order by date_day 
+            rows between
+                14 preceding and 
+                current row
+        ) as avg_daily_arrival_past_two_weeks,
+
+        avg(num_inventory) over (
+            order by date_day 
+            rows between
+                14 preceding and 
+                current row
+        ) as avg_daily_inventory_past_two_weeks
+    
+    from joined 
+
+    group by 1,2,3
+
 )
 
-select * from joined
+select * from final 
