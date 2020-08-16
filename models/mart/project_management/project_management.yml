@@ -17,5 +17,13 @@ models:
           tests:
             - unique 
             - not_null
+    - name: snap_kanban_daily_flow
+      description: Rolls up hourly kanban activity to represent aggregated figured per day. Used to calculate arrivals and inventory as components of lead time.
+      columns:
+        - name: date_day
+          description: Primary key
+          tests:
+            - unique 
+            - not_null
 
           
