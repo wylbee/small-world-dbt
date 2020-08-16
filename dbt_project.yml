@@ -35,9 +35,18 @@ models:
   small_world_analytics:
       materialized: view
       mart:
+        project_management:
+          schema: mart_project_management
         quantified_self:
-            schema: mart_quantified_self
+          schema: mart_quantified_self
       staging:
         google_sheets:
-            schema: stg_google_sheets
+          schema: stg_google_sheets
+        trello: 
+          schema: stg_trello
+        utils:
+          schema: utils
+
+seeds:
+  schema: seeds
           

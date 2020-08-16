@@ -1,0 +1,16 @@
+version: 2
+
+models:
+    - name: stg_trello_actions
+      description: Transaction log of events performed in trello. Grain is one event per row.
+      columns:
+          - name: action_id
+            description: Primary Key
+            tests:
+                - unique
+                - not_null
+
+sources:
+  - name: raw_trello
+    tables:
+      - name: actions

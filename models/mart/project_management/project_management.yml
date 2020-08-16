@@ -1,0 +1,29 @@
+version: 2
+
+models:
+    - name: fct_kanban_activity
+      description: Fact table that represents state changes on the Personal Kanban board. Used to track Kanban & Lean system health metrics.
+      columns:
+          - name: action_id
+            description: Primary Key
+            tests:
+                - unique
+                - not_null
+    - name: kanban_column_status_by_hour
+      description: Record kanban column activity by hour. Grain is a card by hour.
+      columns:
+        - name: card_hour_id
+          description: Primary key constructed from a combination of date_hour and card_id
+          tests:
+            - unique 
+            - not_null
+    - name: snap_kanban_daily_flow
+      description: Rolls up hourly kanban activity to represent aggregated figured per day. Used to calculate arrivals and inventory as components of lead time.
+      columns:
+        - name: date_day
+          description: Primary key
+          tests:
+            - unique 
+            - not_null
+
+          

@@ -1,0 +1,79 @@
+﻿actual,cleaned,hierarchy
+In Process- Acceptance Criteria,Analysis,2
+Ready For Work [Professional],Ready for Work,3
+Intake,Backlog,1
+[Analysis] In Progress,Analysis,2
+Execute [Professional],Execute,4
+[Resources] 🏊 Z,[Resources],999
+Execute,Execute,4
+[Analysis] In Progress <Limit 2>,Analysis,2
+[Verify] In Progress,Verify,5
+[Execute] In Progress <Limit 2>,Execute,4
+[Done],Done,6
+Ready For Work,Ready for Work,3
+[Analysis] Done <Limit 2>,Ready for Work,3
+[In Process] Ready for Work,Analysis,2
+[Backlog] Ready for Work,Backlog,1
+[Resources],[Resources],999
+[In Process] Ready for Work <Limit 2>,Analysis,2
+[To Do]- This Week,Backlog,1
+[Execute] Done <Limit 2>,Verify,5
+[Intake],Backlog,1
+[To Do] Next Week,Backlog,1
+Done,Done,6
+[Verify] In Progress <Limit 2>,Verify,5
+[Templates],[Resources],999
+[To Do] Selected for Work <Limit 2>,Ready for Work,3
+[Intake] Churn,Backlog,1
+Execute 🏊Expadite,Execute,4
+Backlog 🏊Personal,Backlog,1
+Backlog 🏊 Slope Learning,Backlog,1
+[In Process] Acceptance Criteria <Limit 2>,Analysis,2
+Execute 🏊Expedite,Execute,4
+Verify Done,Done,6
+[To Do] Ready for Work,Ready for Work,3
+[In Process] Verify <Limit 1>,Verify,5
+[Resources] 🏊Resources,[Resources],999
+[In Process] Execute <Limit 2>,Execute,4
+Backlog 🏊Expadite,Backlog,1
+[To Do] Hammering,Analysis,2
+Analysis 🏊 Professional,Analysis,2
+[Execute] In Progress,Execute,4
+[To Do] Ready for Work <Limit 2>,Ready for Work,3
+Scope,Analysis,2
+[Backlog],Backlog,1
+Verify [Done] <Limit 10>,Verify,5
+[To Do] Selected for Work,Ready for Work,3
+Backlog 🏊 Personal,Backlog,1
+Define Done,Analysis,2
+Selected,Ready for Work,3
+[Verify] Done,Done,6
+[To Do] This Week,Backlog,1
+[Execute] Done,Verify,5
+[Resources] 🏊,[Resources],999
+[In Process] Execute [2],Execute,4
+[Intake] <Limit 10>,Backlog,1
+AnalysisProfessional,Analysis,2
+Analysis,Analysis,2
+[Resolve] In Progress,Execute,4
+[In Process] Acceptance Criteria,Analysis,2
+[Resources] 🏊Z,[Resources],999
+Backlog,Backlog,1
+Backlog 🏊Slope Learning,Backlog,1
+In Progress,Execute,4
+Verify,Verify,5
+Do,Execute,4
+[In Process] Execute,Execute,4
+[Analysis] Done,Ready for Work,3
+[Analysis] Hammering,Analysis,2
+Done [Professional],Done,6
+Verify [Professional],Verify,5
+Backlog 🏊 Professional,Backlog,1
+To Do- This Week,Backlog,1
+Completed Retros,[Resources],999
+Verify [Done],Done,6
+[In Process] Verify <Limit 2>,Verify,5
+[In Process] Verify [2],Verify,5
+[Intake] Hammering,Verify,5
+[In Process] Verify,Verify,5
+Analysis [Professional],Analysis,2
