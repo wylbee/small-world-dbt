@@ -28,6 +28,10 @@ filtered as (
 joined as (
 
     select 
+        {{ dbt_utils.surrogate_key([
+            'date_hour',
+            'card_id'
+        ]) }} as card_hour_id,
         spine.date_hour,
         filtered.card_id,
         filtered.card_name,

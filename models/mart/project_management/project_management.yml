@@ -1,14 +1,6 @@
 version: 2
 
 models:
-    - name: fct_deep_work_tracker
-      description: Fact table of deep work tracking.
-      columns:
-          - name: tracker_activity_id
-            description: Primary Key
-            tests:
-                - unique
-                - not_null
     - name: fct_kanban_activity
       description: Fact table that represents state changes on the Personal Kanban board. Used to track Kanban & Lean system health metrics.
       columns:
@@ -17,5 +9,13 @@ models:
             tests:
                 - unique
                 - not_null
-    - name: kanban_column_status_by_minute
-      description: Record kanban column activity by minute. Grain is a card by minute.
+    - name: kanban_column_status_by_hour
+      description: Record kanban column activity by hour. Grain is a card by hour.
+      columns:
+        - name: card_hour_id
+          description: Primary key constructed from a combination of date_hour and card_id
+          tests:
+            - unique 
+            - not_null
+
+          

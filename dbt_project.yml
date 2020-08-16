@@ -35,6 +35,8 @@ models:
   small_world_analytics:
       materialized: view
       mart:
+        project_management:
+          schema: mart_project_management
         quantified_self:
           schema: mart_quantified_self
       staging:
