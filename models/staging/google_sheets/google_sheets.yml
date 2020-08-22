@@ -9,8 +9,19 @@ models:
             tests:
                 - unique
                 - not_null
+    - name: stg_account_balances
+      description: Google sheet log family financial account balances pulled at different points in time. Grain is a pull date x account name x asset name.
+      columns:
+          - name: account_balance_id
+            description: Primary Key
+            tests:
+                - unique
+                - not_null
 
 sources:
   - name: raw_google_sheets_deep_work_tracker
     tables:
       - name: dw_log
+  - name: raw_google_sheets_financial_data
+    tables:
+      - name: account_balances
