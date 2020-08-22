@@ -10,9 +10,17 @@ models:
                 - unique
                 - not_null
     - name: stg_account_balances
-      description: Google sheet log family financial account balances pulled at different points in time. Grain is a pull date x account name x asset name.
+      description: Google sheet that logs family financial account balances pulled at different points in time. Grain is a pull date x account name x asset name.
       columns:
           - name: account_balance_id
+            description: Primary Key
+            tests:
+                - unique
+                - not_null
+    - name: stg_fund_conversions
+      description: Google sheet log that breaks bundled assets into their component parts. Specifically used to move from total world/target retirement funds to total US/Int & stocks/bonds. Grain is a pull date x asset name x asset category x asset class.
+      columns:
+          - name: fund_conversions_id
             description: Primary Key
             tests:
                 - unique
@@ -25,3 +33,4 @@ sources:
   - name: raw_google_sheets_financial_data
     tables:
       - name: account_balances
+      - name: fund_conversions
