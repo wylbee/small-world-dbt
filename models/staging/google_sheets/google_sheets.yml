@@ -41,6 +41,14 @@ models:
           tests:
             - unique
             - not_null
+    - name: stg_okr_key_results
+      description: Google sheet data that lists key_results within an OKR framework.
+      columns:
+        - name: key_result_id
+          description: Primary Key
+          tests:
+            - unique
+            - not_null
 
 sources:
   - name: raw_google_sheets_deep_work_tracker
@@ -53,3 +61,4 @@ sources:
   - name: raw_google_sheets_okrs
     tables:
       - name: objectives
+      - name: key_results
