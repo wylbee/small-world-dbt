@@ -17,4 +17,17 @@ models:
             tests:
                 - unique
                 - not_null
+    - name: fct_financial_actuals
+      description: Dimension table of objectives and key results.
+      columns:
+          - name: financial_actuals_id
+            description: Primary Key
+            tests:
+                - unique
+                - not_null
+    - name: metrics_okrs
+      description: Metrics table of objectives and key results vs actuals by day.
+      columns:
+          - name: financial_actuals_id
+            description: Primary Key
               
