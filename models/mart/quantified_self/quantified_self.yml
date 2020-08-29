@@ -9,3 +9,12 @@ models:
             tests:
                 - unique
                 - not_null
+    - name: dim_okrs
+      description: Dimension table of objectives and key results.
+      columns:
+          - name: key_result_id
+            description: Primary Key
+            tests:
+                - unique
+                - not_null
+              
