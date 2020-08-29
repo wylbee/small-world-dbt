@@ -33,6 +33,14 @@ models:
             tests:
                 - unique
                 - not_null
+    - name: stg_okr_objectives
+      description: Google sheet data that lists objectives within an OKR framework.
+      columns:
+        - name: objective_id
+          description: Primary Key
+          tests:
+            - unique
+            - not_null
 
 sources:
   - name: raw_google_sheets_deep_work_tracker
@@ -42,3 +50,6 @@ sources:
     tables:
       - name: account_balances
       - name: fund_conversions
+  - name: raw_google_sheets_okrs
+    tables:
+      - name: objectives
