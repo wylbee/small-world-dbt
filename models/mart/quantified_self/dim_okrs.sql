@@ -24,6 +24,7 @@ joined as (
 
         key_results.key_result_value,
         key_results.key_result_unit,
+        key_results.key_result_metric_name,
 
         objectives.date_active_from as date_active_from_objective,
         objectives.date_active_to as date_active_to_objective,
