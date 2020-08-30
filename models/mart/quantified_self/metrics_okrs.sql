@@ -12,12 +12,13 @@ finance as (
 
 ),
 
-merp as (
+joined as (
 
     select 
         finance.date_day,
         finance.metric_name,
         finance.metric_value,
+        okrs.key_result_id,
         okrs.key_result_value,
 
         round(
@@ -29,7 +30,11 @@ merp as (
                 )::decimal
             ),
             2
-         ) as target_value
+         ) as target_value,
+
+         okrs.threshold_poor_to_average,
+         okrs.threshold_average_to_good,
+         okrs.threshold_good_to_max
     
     from finance
     
@@ -40,6 +45,23 @@ merp as (
                 okrs.date_active_from_key_result and 
                 okrs.date_active_to_key_result
 
+),
+
+add_range as (
+
+    select 
+        date_day,
+        metric_name,
+        metric_value,
+        key_result_id,
+        key_result_value,
+
+        threshold_poor_to_average * target_value as target_value_poor_to_average,
+        threshold_average_to_good * target_value as target_value_average_to_good,
+        threshold_good_to_max * target_value as target_value_good_to_max
+    
+    from joined
+
 )
 
-select * from merp
+select * from add_range

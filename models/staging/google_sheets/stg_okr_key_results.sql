@@ -16,6 +16,9 @@ cleaned as (
         key_result_value,
         key_result_unit,
         key_result_metric_name,
+        threshold_poor_to_average,
+        threshold_average_to_good,
+        threshold_good_to_max,
 
         to_date(active_from, 'YYYY-MM-DD') as date_active_from,
         to_date(active_to, 'YYYY-MM-DD') as date_active_to,

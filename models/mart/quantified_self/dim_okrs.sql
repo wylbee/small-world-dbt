@@ -25,6 +25,9 @@ joined as (
         key_results.key_result_value,
         key_results.key_result_unit,
         key_results.key_result_metric_name,
+        key_results.threshold_poor_to_average,
+        key_results.threshold_average_to_good,
+        key_results.threshold_good_to_max,
 
         objectives.date_active_from as date_active_from_objective,
         objectives.date_active_to as date_active_to_objective,

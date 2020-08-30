@@ -30,4 +30,9 @@ models:
       columns:
           - name: financial_actuals_id
             description: Primary Key
+    - name: metrics_financials
+      description: Metrics table of financial KPIs by day.
+      columns:
+          - name: financial_actuals_id
+            description: Primary Key
               
