@@ -49,6 +49,22 @@ models:
           tests:
             - unique
             - not_null
+    - name: stg_personal_capital_transactions
+      description: Raw financial transactions data from Personal Capital loaded via google sheet.
+      columns:
+        - name: pc_transaction_id
+          description: Primary Key
+          tests:
+            - unique
+            - not_null
+    - name: financial_transactions__unioned
+      description: Unioned financial transaction data from multiple sources.
+      columns:
+        - name: pc_transaction_id
+          description: Primary Key
+          tests:
+            - unique
+            - not_null
 
 sources:
   - name: raw_google_sheets_deep_work_tracker
@@ -58,6 +74,7 @@ sources:
     tables:
       - name: account_balances
       - name: fund_conversions
+      - name: personal_capital_transactions
   - name: raw_google_sheets_okrs
     tables:
       - name: objectives
