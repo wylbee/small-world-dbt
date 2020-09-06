@@ -16,6 +16,13 @@ joined as (
 
     select 
         transactions.*,
+        
+        case 
+            when category not in ('Transfers', 'Credit Card Payments', 'General Rebalance') and 
+            dollar_value > 0 then true
+            else false 
+        end as is_income,
+
         mapping.is_savings,
         
         case 

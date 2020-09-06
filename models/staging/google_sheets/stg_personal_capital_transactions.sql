@@ -19,7 +19,7 @@ cleaned as (
         "Account" as account_name,
         "Amount" as dollar_value,
         "Category" as category,
-        "Date" as pc_transaction_date,
+        to_date("Date", 'YYYY-MM-DD') as pc_transaction_date,
         "Description" as pc_transaction_description
 
     from raw_data

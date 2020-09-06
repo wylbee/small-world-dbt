@@ -6,27 +6,94 @@ spine as (
 
 ),
 
-finance as (
+balances as (
 
     select * from {{ ref('fct_financial_actuals') }}
 
 ),
 
-joined as (
+transactions as (
+
+    select * from {{ ref('fct_financial_transactions') }}
+
+),
+
+balances_joined as (
 
     select 
         spine.date_day,
-        finance.metric_name,
-        finance.dollar_value as metric_value
+        balances.metric_name,
+        'BALANCE AS OF DATE' as metric_type,
+        balances.dollar_value as metric_value
     
     from spine 
 
-    left outer join finance
+    left outer join balances
         on 
             spine.date_day between 
-                finance.active_from and 
-                finance.active_to
+                balances.active_from and 
+                balances.active_to
+
+),
+
+income as (
+
+    select 
+        spine.date_day,
+        'INCOME' as metric_name,
+        'YEAR TO DATE' as metric_type,
+         
+	    sum(dollar_value) as metric_value
+    
+    from spine 
+
+    left outer join transactions
+        on 
+            spine.date_day >= date_trunc('year', transactions.pc_transaction_date) and 
+            spine.date_day >= transactions.pc_transaction_date
+
+    where 
+        transactions.contribution_is_transfer = false and 
+        transactions.is_income = true
+
+    group by 1
+
+),
+
+savings as (
+
+    select 
+        spine.date_day,
+        'SAVINGS' as metric_name,
+        'YEAR TO DATE' as metric_type,
+         
+	    sum(dollar_value) as metric_value
+    
+    from spine 
+
+    left outer join transactions
+        on 
+            spine.date_day >= date_trunc('year', transactions.pc_transaction_date) and 
+            spine.date_day >= transactions.pc_transaction_date
+
+    where transactions.is_savings = true
+
+    group by 1
+
+),
+
+unioned as (
+
+    select * from balances_joined
+
+    union all 
+
+    select * from income
+
+    union all 
+
+    select * from savings
 
 )
 
-select * from joined
+select * from unioned
