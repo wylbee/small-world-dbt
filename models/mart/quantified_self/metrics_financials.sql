@@ -23,7 +23,7 @@ balances_joined as (
     select 
         spine.date_day,
         balances.metric_name,
-        'BALANCE AS OF DATE' as metric_type,
+        'BALANCE_AS_OF_DATE' as metric_type,
         balances.dollar_value as metric_value
     
     from spine 
@@ -40,8 +40,8 @@ gross_income as (
 
     select 
         spine.date_day,
-        'GROSS INCOME' as metric_name,
-        'YEAR TO DATE' as metric_type,
+        'GROSS_INCOME' as metric_name,
+        'YEAR_TO_DATE' as metric_type,
          
 	    sum(dollar_value) as metric_value
     
@@ -65,7 +65,7 @@ savings as (
     select 
         spine.date_day,
         'SAVINGS' as metric_name,
-        'YEAR TO DATE' as metric_type,
+        'YEAR_TO_DATE' as metric_type,
          
 	    sum(dollar_value) as metric_value
     
@@ -86,8 +86,8 @@ savings_rate as (
 
     select 
         spine.date_day,
-        'SAVINGS RATE' as metric_name,
-        'RATE AS OF DATE' as metric_type,
+        'SAVINGS_RATE' as metric_name,
+        'YEAR_TO_DATE' as metric_type,
 
         savings.metric_value / gross_income.metric_value as metric_value
     
