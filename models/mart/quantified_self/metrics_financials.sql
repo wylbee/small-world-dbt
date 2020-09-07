@@ -36,11 +36,11 @@ balances_joined as (
 
 ),
 
-income as (
+gross_income as (
 
     select 
         spine.date_day,
-        'INCOME' as metric_name,
+        'GROSS INCOME' as metric_name,
         'YEAR TO DATE' as metric_type,
          
 	    sum(dollar_value) as metric_value
@@ -82,17 +82,38 @@ savings as (
 
 ),
 
+savings_rate as (
+
+    select 
+        spine.date_day,
+        'SAVINGS RATE' as metric_name,
+        'RATE AS OF DATE' as metric_type,
+
+        savings.metric_value / gross_income.metric_value as metric_value
+    
+    from spine 
+
+    left outer join savings on spine.date_day = savings.date_day
+
+    left outer join gross_income on spine.date_day = gross_income.date_day
+
+),
+
 unioned as (
 
     select * from balances_joined
 
     union all 
 
-    select * from income
+    select * from gross_income
 
     union all 
 
     select * from savings
+
+    union all 
+
+    select * from savings_rate
 
 )
 
