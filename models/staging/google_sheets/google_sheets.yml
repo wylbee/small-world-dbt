@@ -75,6 +75,7 @@ sources:
       - name: account_balances
       - name: fund_conversions
       - name: personal_capital_transactions
+      - name: m1_transactions
   - name: raw_google_sheets_okrs
     tables:
       - name: objectives
