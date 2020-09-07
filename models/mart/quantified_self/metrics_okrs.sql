@@ -33,7 +33,7 @@ joined as (
                     ),
                     2
                 ) 
-            else okrs.key_result_value 
+            else round(okrs.key_result_value::decimal, 2)
         end as target_value,
 
          okrs.threshold_poor_to_average,
