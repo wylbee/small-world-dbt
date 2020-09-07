@@ -49,8 +49,8 @@ gross_income as (
 
     left outer join transactions
         on 
-            spine.date_day >= date_trunc('year', transactions.pc_transaction_date) and 
-            spine.date_day >= transactions.pc_transaction_date
+            spine.date_day >= date_trunc('year', transactions.date_active) and 
+            spine.date_day >= transactions.date_active
 
     where 
         transactions.contribution_is_transfer = false and 
@@ -73,8 +73,8 @@ savings as (
 
     left outer join transactions
         on 
-            spine.date_day >= date_trunc('year', transactions.pc_transaction_date) and 
-            spine.date_day >= transactions.pc_transaction_date
+            spine.date_day >= date_trunc('year', transactions.date_active) and 
+            spine.date_day >= transactions.date_active
 
     where transactions.is_savings = true
 

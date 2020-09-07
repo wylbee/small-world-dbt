@@ -2,7 +2,7 @@ with
 
 raw_data as (
 
-    select * from {{ source('raw_google_sheets_financial_data', 'm1_transactions') }}
+    select * from {{ source('raw_google_sheets_financial_data', 'brokerage_transactions') }}
 
 ),
 
@@ -18,8 +18,8 @@ cleaned as (
         
         "Type" as brokerage_transaction_type,
         "Description" as brokerage_transaction_description,
-        "Net Amount" as net_amount,
-        "Settle Date" as date_active
+        "Net Amount" as dollar_value,
+        to_date("Settle Date", 'YYYY-MM-DD') as date_active
     
     from raw_data
 
