@@ -26,7 +26,7 @@ models:
                 - unique
                 - not_null
     - name: account_balances__split
-      description: Split account balances into their component parts to establish the desired grain for account balance reporting
+      description: Split account balances into their component parts to establish the desired grain for account balance reporting.
       columns:
           - name: account_categorized_asset_id
             description: Primary Key
@@ -58,13 +58,22 @@ models:
             - unique
             - not_null
     - name: financial_transactions__unioned
-      description: Unioned financial transaction data from multiple sources.
+      description: Union cleaned up financial transaction data from multiple sources.
       columns:
-        - name: pc_transaction_id
+        - name: financial_transaction_id
           description: Primary Key
           tests:
             - unique
             - not_null
+    - name: stg_brokerage_transactions
+      description: Raw financial transactions data from M1 Finance loaded via google sheet.
+      columns:
+        - name: brokerage_transaction_id
+          description: Primary Key
+          tests:
+            - unique
+            - not_null
+
 
 sources:
   - name: raw_google_sheets_deep_work_tracker

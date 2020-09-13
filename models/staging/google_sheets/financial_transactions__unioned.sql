@@ -15,6 +15,7 @@ brokerage as (
 pc_standardized as (
 
     select 
+        pc_transaction_id as financial_transaction_id,
         account_name,
         dollar_value,
         category,
@@ -28,6 +29,7 @@ pc_standardized as (
 brokerage_standardized as (
 
     select 
+        brokerage_transaction_id as financial_transaction_id,
         'M1 Finance' as account_name,
         dollar_value,
         'Securities Trades' as category,

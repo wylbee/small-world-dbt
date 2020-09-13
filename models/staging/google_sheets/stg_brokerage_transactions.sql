@@ -12,7 +12,8 @@ cleaned as (
         {{ dbt_utils.surrogate_key(
             [
                 '__sdc_row',
-                '__sdc_spreadsheet_id'
+                '__sdc_spreadsheet_id',
+                '__sdc_sheet_id'
             ]
         ) }} as brokerage_transaction_id,
         

@@ -10,7 +10,7 @@ models:
                 - unique
                 - not_null
     - name: dim_okrs
-      description: Dimension table of objectives and key results.
+      description: Dimension table of objectives and key results. Grain is a Key Result.
       columns:
           - name: key_result_id
             description: Primary Key
@@ -18,21 +18,37 @@ models:
                 - unique
                 - not_null
     - name: fct_financial_actuals
-      description: Dimension table of objectives and key results.
+      description: Account balance actuals with active from/to dates and metric labels. Grain is an account by date.
       columns:
           - name: financial_actuals_id
             description: Primary Key
             tests:
                 - unique
                 - not_null
+    - name: fct_financial_transactions
+      description: Fact table of financial transactions with descriptive booleans applied. Grain is a financial transaction per row.
+      columns:
+          - name: financial_transaction_id
+            description: Primary Key
+            tests:
+                - unique
+                - not_null
     - name: metrics_okrs
-      description: Metrics table of objectives and key results vs actuals by day.
-      columns:
-          - name: financial_actuals_id
-            description: Primary Key
+      description: Metrics table of objectives and key results vs actuals by day. Grain is a metric x day x key result.
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - date_day
+              - metric_name
+              - key_result_id
+
     - name: metrics_financials
-      description: Metrics table of financial KPIs by day.
-      columns:
-          - name: financial_actuals_id
-            description: Primary Key
+      description: Metrics table of financial KPIs by day. Grain is a metric x day x type.
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - date_day
+              - metric_name
+              - metric_type
+
               
