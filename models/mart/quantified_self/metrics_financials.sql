@@ -30,9 +30,8 @@ balances_joined as (
 
     left outer join balances
         on 
-            spine.date_day between 
-                balances.active_from and 
-                balances.active_to
+            spine.date_day >= balances.active_from and 
+            spine.date_day < balances.active_to
 
 ),
 
