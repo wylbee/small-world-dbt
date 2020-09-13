@@ -9,8 +9,83 @@ models:
             tests:
                 - unique
                 - not_null
+    - name: stg_account_balances
+      description: Google sheet that logs family financial account balances pulled at different points in time. Grain is a pull date x account name x asset name.
+      columns:
+          - name: account_balance_id
+            description: Primary Key
+            tests:
+                - unique
+                - not_null
+    - name: stg_fund_conversions
+      description: Google sheet log that breaks bundled assets into their component parts. Specifically used to move from total world/target retirement funds to total US/Int & stocks/bonds. Grain is a pull date x asset name x asset category x asset class.
+      columns:
+          - name: fund_conversions_id
+            description: Primary Key
+            tests:
+                - unique
+                - not_null
+    - name: account_balances__split
+      description: Split account balances into their component parts to establish the desired grain for account balance reporting.
+      columns:
+          - name: account_categorized_asset_id
+            description: Primary Key
+            tests:
+                - unique
+                - not_null
+    - name: stg_okr_objectives
+      description: Google sheet data that lists objectives within an OKR framework.
+      columns:
+        - name: objective_id
+          description: Primary Key
+          tests:
+            - unique
+            - not_null
+    - name: stg_okr_key_results
+      description: Google sheet data that lists key_results within an OKR framework.
+      columns:
+        - name: key_result_id
+          description: Primary Key
+          tests:
+            - unique
+            - not_null
+    - name: stg_personal_capital_transactions
+      description: Raw financial transactions data from Personal Capital loaded via google sheet.
+      columns:
+        - name: pc_transaction_id
+          description: Primary Key
+          tests:
+            - unique
+            - not_null
+    - name: financial_transactions__unioned
+      description: Union cleaned up financial transaction data from multiple sources.
+      columns:
+        - name: financial_transaction_id
+          description: Primary Key
+          tests:
+            - unique
+            - not_null
+    - name: stg_brokerage_transactions
+      description: Raw financial transactions data from M1 Finance loaded via google sheet.
+      columns:
+        - name: brokerage_transaction_id
+          description: Primary Key
+          tests:
+            - unique
+            - not_null
+
 
 sources:
   - name: raw_google_sheets_deep_work_tracker
     tables:
       - name: dw_log
+  - name: raw_google_sheets_financial_data
+    tables:
+      - name: account_balances
+      - name: fund_conversions
+      - name: personal_capital_transactions
+      - name: brokerage_transactions
+  - name: raw_google_sheets_okrs
+    tables:
+      - name: objectives
+      - name: key_results

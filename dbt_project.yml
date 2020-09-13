@@ -38,6 +38,7 @@ models:
         project_management:
           schema: mart_project_management
         quantified_self:
+          materialized: table
           schema: mart_quantified_self
       staging:
         google_sheets:
