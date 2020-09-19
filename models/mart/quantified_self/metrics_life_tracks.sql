@@ -12,28 +12,49 @@ tracks as (
 
 ),
 
-atoms as (
+mapping as (
+
+    select * from {{ ref('life_tracking_mapping') }}
+
+),
+
+mapped as (
+
+    select 
+        tracks.*,
+        mapping.*
+    
+    from tracks 
+
+    left outer join mapping 
+        on 
+            tracks.tracker_name = mapping.tracker_name and 
+            tracks.tracker_context = mapping.tracker_context
+    
+    where mapping.metric_name is not null 
+
+),
+
+joined as (
 
     select 
         spine.date_day,
-        'NUM_ATOMS' as metric_name,
-        'DAILY_COUNT' as metric_type,
-        sum(tracker_value) as metric_value
+        mapped.metric_name,
+        mapped.metric_type,
+        sum(mapped.tracker_value/mapped.conversion_denominator) as metric_value
 
     from spine 
 
-    left outer join tracks 
-        on 
-            spine.date_day = tracks.date_completed and
-            tracker_name = 'atom'
+    left outer join mapped
+        on spine.date_day = mapped.date_completed 
 
-    group by 1
+    group by 1,2,3
 
 ),
 
 unioned as (
 
-    select * from atoms 
+    select * from joined
 
 )
 

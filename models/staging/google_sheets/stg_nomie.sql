@@ -27,7 +27,10 @@ cleaned as (
 
         tracker as tracker_name,
 
-        split_part(note, '+', 2) as tracker_context,
+        case 
+            when note like '%+%' then split_part(note, '+', 2)
+            else 'general'        
+        end as tracker_context,
 
         note as tracker_note,
         value as tracker_value,

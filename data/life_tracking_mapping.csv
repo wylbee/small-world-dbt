@@ -1,0 +1,5 @@
+﻿tracker_name,tracker_context,metric_name,metric_type,conversion_denominator
+atom,general,NUM_ATOMS,DAILY_COUNT,1
+deep_work,professional,DW_PROF_MINUTES,DAILY_SUM,60
+slope_learning,aml,SL_AML_MINUTES,DAILY_SUM,60
+deep_work,craft,SW_CRAFT_MIN,DAILY_SUM,60
