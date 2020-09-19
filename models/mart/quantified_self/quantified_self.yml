@@ -50,5 +50,13 @@ models:
               - date_day
               - metric_name
               - metric_type
+    - name: fct_life_tracks
+      description: Fact table of manually tracked life metrics. Grain is a tracking per row.
+      columns:
+          - name: tracker_id
+            description: Primary Key
+            tests:
+                - unique
+                - not_null
 
               
