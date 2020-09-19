@@ -58,5 +58,13 @@ models:
             tests:
                 - unique
                 - not_null
+    - name: metrics_life_tracks
+      description: Metrics table of life tracking KPIs by day. Grain is a metric x day x type.
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - date_day
+              - metric_name
+              - metric_type
 
               
