@@ -46,7 +46,7 @@ joined as (
     from spine 
 
     left outer join mapped
-        on spine.date_day = mapped.date_completed 
+        on spine.date_day = mapped.date_completed
 
     group by 1,2,3
 
