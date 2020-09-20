@@ -58,15 +58,22 @@ joined as (
         case 
             when adjust_type.metric_type like '%AVG_DAILY%' then 
                 avg(adjust_type.metric_value) over (
-                    partition by 
-                        adjust_type.metric_name,
-                        date_part('day', adjust_type.date_day)
+                    partition by adjust_type.metric_name
+                    order by adjust_type.date_day
                 )
             when adjust_type.metric_type like '%AVG_WEEKLY%' then 
-                avg(adjust_type.metric_value) over (
-                    partition by 
-                        adjust_type.metric_name,
-                        date_part('week', adjust_type.date_day)
+                sum(adjust_type.metric_value) over (
+                    partition by adjust_type.metric_name 
+                    order by adjust_type.date_day
+                )/(
+                    dense_rank() over (
+                        partition by adjust_type.metric_name
+                        order by date_part('week', adjust_type.date_day) asc
+                    ) + 
+                    dense_rank() over(
+                        partition by adjust_type.metric_name
+                        order by date_part('week', adjust_type.date_day) desc
+                    ) - 1
                 )
             else adjust_type.metric_value
         end as metric_value,
@@ -79,9 +86,9 @@ joined as (
                 round(
                     okrs.key_result_value::decimal *    (
                         (
-                            adjust_type.date_day::date - okrs.      date_active_from_key_result::date
+                            adjust_type.date_day::date - okrs.date_active_from_key_result::date
                         )::decimal / (
-                            okrs.date_active_to_key_result::date - okrs.        date_active_from_key_result::date
+                            okrs.date_active_to_key_result::date - okrs.date_active_from_key_result::date
                         )::decimal
                     ),
                     2
