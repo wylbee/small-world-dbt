@@ -1,0 +1,3 @@
+﻿metric_name,metric_type,override_type
+SL_AML_MINUTES,DAILY_SUM,AVG_WEEKLY
+NUM_ATOMS,DAILY_SUM,AVG_DAILY

@@ -73,6 +73,14 @@ models:
           tests:
             - unique
             - not_null
+    - name: stg_nomie
+      description: Raw habit/behavior tracker data from Nomie loaded via google sheet.
+      columns:
+        - name: tracker_id
+          description: Primary Key
+          tests:
+            - unique
+            - not_null
 
 
 sources:
@@ -89,3 +97,6 @@ sources:
     tables:
       - name: objectives
       - name: key_results
+  - name: raw_google_sheets_nomie
+    tables:
+      - name: export
