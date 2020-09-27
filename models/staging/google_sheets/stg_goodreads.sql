@@ -20,6 +20,20 @@ cleaned as (
 
     from raw_data
 
+),
+
+add_id as (
+
+    select 
+        {{ dbt_utils.surrogate_key(
+            [
+                'book_id'
+            ]
+        ) }} as tracker_id,
+        *
+    
+    from cleaned 
+
 )
 
-select * from cleaned
+select * from add_id
