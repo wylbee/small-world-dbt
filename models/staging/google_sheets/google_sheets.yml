@@ -84,7 +84,7 @@ models:
     - name: stg_goodreads
       description: Raw reading data from Goodreads loaded by google sheet.
       columns:
-        - name: book_id
+        - name: tracker_id
           description: Primary Key
           tests:
             - unique
