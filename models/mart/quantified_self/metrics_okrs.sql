@@ -75,6 +75,11 @@ joined as (
                         order by date_part('week', adjust_type.date_day) desc
                     ) - 1
                 )
+            when adjust_type.metric_type like '%RUNNING_TOTAL%' then 
+                sum(adjust_type.metric_value) over (
+                    partition by adjust_type.metric_name 
+                    order by adjust_type.date_day
+                )
             else adjust_type.metric_value
         end as metric_value,
 
@@ -82,17 +87,20 @@ joined as (
         okrs.key_result_value,
 
         case
-            when metric_type like '%AS_OF_DATE%' then 
-                round(
-                    okrs.key_result_value::decimal *    (
-                        (
-                            adjust_type.date_day::date - okrs.date_active_from_key_result::date
-                        )::decimal / (
-                            okrs.date_active_to_key_result::date - okrs.date_active_from_key_result::date
-                        )::decimal
-                    ),
-                    2
-                ) 
+            when 
+                metric_type like '%AS_OF_DATE%' or
+                metric_type like '%RUNNING_TOTAL%' 
+                then 
+                    round(
+                        okrs.key_result_value::decimal *    (
+                            (
+                                adjust_type.date_day::date - okrs.date_active_from_key_result::date
+                            )::decimal / (
+                                okrs.date_active_to_key_result::date - okrs.date_active_from_key_result::date
+                            )::decimal
+                        ),
+                        2
+                    ) 
             else round(okrs.key_result_value::decimal, 2)
         end as target_value,
 
