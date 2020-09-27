@@ -81,6 +81,14 @@ models:
           tests:
             - unique
             - not_null
+    - name: stg_goodreads
+      description: Raw reading data from Goodreads loaded by google sheet.
+      columns:
+        - name: tracker_id
+          description: Primary Key
+          tests:
+            - unique
+            - not_null
 
 
 sources:
@@ -98,5 +106,8 @@ sources:
       - name: objectives
       - name: key_results
   - name: raw_google_sheets_nomie
+    tables:
+      - name: export
+  - name: raw_goodreads 
     tables:
       - name: export
