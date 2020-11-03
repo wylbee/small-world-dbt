@@ -16,7 +16,8 @@ cleaned as (
 
         to_date("Date Added", 'YYYY-MM-DD') as date_added,
         
-        date '1899-12-30' + "Date Read"::int * interval '1' day as date_read
+        --date '1899-12-30' + "Date Read"::int * interval '1' day as date_read
+        to_date("Date Read", 'YYYY-MM-DD') as date_read
 
     from raw_data
 
