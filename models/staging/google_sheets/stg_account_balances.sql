@@ -2,7 +2,7 @@ with
 
 raw_data as (
 
-    select * from {{ source('raw_google_sheets_financial_data', 'account_balances') }}
+    select * from {{ source('raw', 'account_balances') }}
 
 ),
 
@@ -11,9 +11,9 @@ cleaned as (
     select 
         {{ dbt_utils.surrogate_key(
             [
-                '__sdc_row',
-                '__sdc_spreadsheet_id',
-                '__sdc_sheet_id'
+                'date_pulled',
+                'account_name',
+                'asset_name'
             ]
         ) }} as account_balance_id,
 
@@ -26,7 +26,8 @@ cleaned as (
         shares,
         price,
 
-        to_date(date_pulled, 'YYYY-MM-DD') as date_pulled
+        to_date(date_pulled, 'MM/DD/YYYY') as date_pulled
+
 
     from raw_data 
 
