@@ -2,7 +2,7 @@ with
 
 raw_data as (
 
-    select * from {{ source('raw_google_sheets_nomie', 'export') }}
+    select * from {{ source('raw', 'nomie') }}
 
 ),
 
