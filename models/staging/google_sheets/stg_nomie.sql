@@ -17,9 +17,8 @@ cleaned as (
     select 
         {{ dbt_utils.surrogate_key(
             [
-                '__sdc_row',
-                '__sdc_spreadsheet_id',
-                '__sdc_sheet_id',
+                'epoch',
+                '"end"',
                 'tracker',
                 'note'
             ]
