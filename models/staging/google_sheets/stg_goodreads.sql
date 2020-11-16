@@ -2,7 +2,7 @@ with
 
 raw_data as (
 
-    select * from {{ source('raw_goodreads', 'export') }}
+    select * from {{ source('raw', 'goodreads') }}
 
 ),
 
@@ -14,10 +14,9 @@ cleaned as (
         "Author" as author_name,
         "Exclusive Shelf" as reading_status,
 
-        to_date("Date Added", 'YYYY-MM-DD') as date_added,
+        to_date("Date Added", 'MM/DD/YYYY') as date_added,
         
-        --date '1899-12-30' + "Date Read"::int * interval '1' day as date_read
-        to_date("Date Read", 'YYYY-MM-DD') as date_read
+        to_date("Date Read", 'MM/DD/YYYY') as date_read
 
     from raw_data
 

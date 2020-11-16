@@ -2,7 +2,7 @@ with
 
 raw_data as (
 
-    select * from {{ source('raw_google_sheets_financial_data', 'brokerage_transactions') }}
+    select * from {{ source('raw', 'm1_transactions') }}
 
 ),
 
@@ -11,16 +11,15 @@ cleaned as (
     select 
         {{ dbt_utils.surrogate_key(
             [
-                '__sdc_row',
-                '__sdc_spreadsheet_id',
-                '__sdc_sheet_id'
+                'settle_date',
+                'description'
             ]
         ) }} as brokerage_transaction_id,
         
-        "Type" as brokerage_transaction_type,
-        "Description" as brokerage_transaction_description,
-        "Net Amount" as dollar_value,
-        to_date("Settle Date", 'YYYY-MM-DD') as date_active
+        type as brokerage_transaction_type,
+        description as brokerage_transaction_description,
+        net_amount :: money :: numeric as dollar_value,
+        to_date(settle_date, 'MM/DD/YYYY') as date_active
     
     from raw_data
 

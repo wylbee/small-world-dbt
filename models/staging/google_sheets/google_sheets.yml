@@ -111,3 +111,13 @@ sources:
   - name: raw_goodreads 
     tables:
       - name: export
+  - name: raw
+    tables:
+      - name: account_balances
+      - name: fund_conversions
+      - name: personal_capital_transactions
+      - name: m1_transactions
+      - name: okr_objectives
+      - name: okr_key_results
+      - name: goodreads
+      - name: nomie

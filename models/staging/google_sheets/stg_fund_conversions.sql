@@ -11,9 +11,10 @@ cleaned as (
     select 
         {{ dbt_utils.surrogate_key(
             [
-                '__sdc_row',
-                '__sdc_spreadsheet_id',
-                '__sdc_sheet_id'
+                'asset_name',
+                'asset_category',
+                'date_pulled',
+                'asset_class'
             ]
         ) }} as fund_conversions_id,
 
@@ -22,7 +23,6 @@ cleaned as (
         asset_name,
 
         percent,
-
         to_date(date_pulled, 'YYYY-MM-DD') as date_pulled
 
     from raw_data 

@@ -56,7 +56,7 @@ add_pk_and_value as (
         *,
         
         round(
-            shares * price,
+            (shares * price) :: numeric,
             2
          ) as dollar_value
 
