@@ -2,7 +2,7 @@ with
 
 raw_data as (
 
-    select * from {{ source('raw_google_sheets_okrs', 'key_results')}}
+    select * from {{ source('raw', 'okr_key_results')}}
 
 ),
 
@@ -20,9 +20,9 @@ cleaned as (
         threshold_average_to_good,
         threshold_good_to_max,
 
-        to_date(active_from, 'YYYY-MM-DD') as date_active_from,
-        to_date(active_to, 'YYYY-MM-DD') as date_active_to,
-        to_date(key_result_target_date, 'YYYY-MM-DD') as date_key_result_target
+        to_date(active_from, 'MM/DD/YYYY') as date_active_from,
+        to_date(active_to, 'MM/DD/YYYY') as date_active_to,
+        to_date(key_result_target_date, 'MM/DD/YYYY') as date_key_result_target
 
     from raw_data 
 
