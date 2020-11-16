@@ -24,7 +24,8 @@ cleaned as (
         asset_name,
 
         shares,
-        to_number(price,'L9G999g999.99') as price,
+        --to_number(price,'L9G999g999.99') as price,
+        price :: money :: numeric as price,
 
         to_date(date_pulled, 'MM/DD/YYYY') as date_pulled
 

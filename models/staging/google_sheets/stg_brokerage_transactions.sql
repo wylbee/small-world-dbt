@@ -18,7 +18,7 @@ cleaned as (
         
         type as brokerage_transaction_type,
         description as brokerage_transaction_description,
-        to_number(net_amount,'L9G999g999.99') as dollar_value,
+        net_amount :: money :: numeric as dollar_value,
         to_date(settle_date, 'MM/DD/YYYY') as date_active
     
     from raw_data
