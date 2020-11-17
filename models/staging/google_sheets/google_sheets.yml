@@ -121,3 +121,4 @@ sources:
       - name: okr_key_results
       - name: goodreads
       - name: nomie
+      - name: toggl
