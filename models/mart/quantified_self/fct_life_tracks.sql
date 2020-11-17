@@ -9,6 +9,13 @@ tracks as (
 books as (
 
     select * from {{ ref('stg_goodreads') }}
+
+),
+
+toggl as (
+
+    select * from {{ ref('stg_toggl') }}
+
 ),
 
 books_cleaned as (
@@ -30,6 +37,41 @@ books_cleaned as (
 
 ),
 
+toggl_cleaned as (
+
+    select
+        tracker_id,
+
+        case 
+            when context_tags like '%deep-work%' then 'deep_work'
+            when context_tags like '%slope-learning%' then 'slope_learning'
+        end as tracker_name,
+
+        case
+            when context_tags like '%professional%' then 'professional'
+            when context_tags like '%craft%' then 'craft'
+            when 
+                context_tags like '%slope-learning%' and 
+                project_name like '%Machine Learning Engineering%'
+                then 'aml'
+            else 'general'
+        end as tracker_context,
+
+        task_description as tracker_note,
+
+        duration_seconds as tracker_value,
+
+        'seconds' as tracker_units,
+        date_ended as date_completed
+    
+    from toggl
+    
+    where 
+        context_tags like '%deep-work%' or 
+        context_tags like '%slope-learning%'
+
+),
+
 unioned as (
 
     select * from tracks
@@ -37,6 +79,10 @@ unioned as (
     union all 
 
     select * from books_cleaned
+
+    union all 
+
+    select * from toggl_cleaned
 
 )
 
