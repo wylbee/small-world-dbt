@@ -14,9 +14,9 @@ cleaned as (
         "Author" as author_name,
         "Exclusive Shelf" as reading_status,
 
-        to_date("Date Added", 'MM/DD/YYYY') as date_added,
+        to_date("Date Added", 'YYYY/MM/DD') as date_added,
         
-        to_date("Date Read", 'MM/DD/YYYY') as date_read
+        to_date("Date Read", 'YYYY/MM/DD') as date_read
 
     from raw_data
 
