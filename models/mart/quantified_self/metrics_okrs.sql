@@ -62,19 +62,10 @@ joined as (
                     order by adjust_type.date_day
                 )
             when adjust_type.metric_type like '%AVG_WEEKLY%' then 
-                sum(adjust_type.metric_value) over (
+                avg(adjust_type.metric_value) over (
                     partition by adjust_type.metric_name 
-                    order by adjust_type.date_day
-                )/(
-                    dense_rank() over (
-                        partition by adjust_type.metric_name
-                        order by date_part('week', adjust_type.date_day) asc
-                    ) + 
-                    dense_rank() over(
-                        partition by adjust_type.metric_name
-                        order by date_part('week', adjust_type.date_day) desc
-                    ) - 1
-                )
+                    order by date_part('week', adjust_type.date_day)
+                ) * 7
             when adjust_type.metric_type like '%RUNNING_TOTAL%' then 
                 sum(adjust_type.metric_value) over (
                     partition by adjust_type.metric_name 
