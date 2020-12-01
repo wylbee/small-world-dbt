@@ -17,9 +17,11 @@ cleaned as (
 
         "id" as toggl_record_id,
         "pid" as toggl_project_id,
+        "uid" as toggl_user_id,
 
         "client" as client_name,
         "project" as project_name,
+        "user" as user_name,
         "description" as task_description,
         to_timestamp("start", 'YYYY-MM-DD hh24:mi:ss') :: timestamptz as date_started,
         to_timestamp("end", 'YYYY-MM-DD hh24:mi:ss') :: timestamptz as date_ended,

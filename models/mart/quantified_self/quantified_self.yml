@@ -66,5 +66,12 @@ models:
               - date_day
               - metric_name
               - metric_type
-
+    - name: tf_time_tracks
+      description: Transaction fact table of persons tracking time spent on tasks.
+      columns:
+          - name: tracker_id
+            description: Primary Key
+            tests:
+                - unique
+                - not_null
               

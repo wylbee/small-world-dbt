@@ -1,0 +1,19 @@
+version: 2
+
+models:
+    - name: dim_people
+      description: Dimension table of people
+      columns:
+          - name: people_id
+            description: Primary Key
+            tests:
+                - unique
+                - not_null
+    - name: dim_tasks
+      description: Dimension table of tasks.
+      columns:
+          - name: task_id
+            description: Primary Key
+            tests:
+                - unique
+                - not_null
