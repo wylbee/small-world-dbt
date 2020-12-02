@@ -23,9 +23,10 @@ fact as (
     select
         tracker_id,
         people_id,
-        task_id 
-        -- when-> start/end
-        -- how many-> duration
+        task_id, 
+        date_started,
+        date_ended,
+        duration_seconds
 
     from base
 
