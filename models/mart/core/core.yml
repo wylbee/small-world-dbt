@@ -17,3 +17,11 @@ models:
             tests:
                 - unique
                 - not_null
+    - name: tf_kpi_targets
+      description: Transaction fact table of kpi targets.
+      columns:
+          - name: target_id
+            description: Primary Key
+            tests:
+                - unique
+                - not_null
