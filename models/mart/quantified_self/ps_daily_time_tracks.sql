@@ -18,6 +18,12 @@ tasks as (
 
 ),
 
+targets as (
+
+    select * from {{ ref('tf_kpi_targets') }}
+
+),
+
 classified as (
 
     select
@@ -59,7 +65,8 @@ aggregated as (
 
     select 
         joined.*,
-        coalesce(sum(classified.duration_seconds/60.0),0) as daily_minutes
+        coalesce(sum(classified.duration_seconds/60.0),0) as daily_minutes_actual,
+        coalesce(max(targets.target_value),0) as daily_minutes_target
     
     from joined
 
@@ -68,6 +75,12 @@ aggregated as (
             joined.date_day = classified.date_ended::timestamp::date and 
             joined.task_category = classified.task_category
     
+    left outer join targets
+        on
+            (joined.date_day between targets.active_from and targets.active_to) and 
+            joined.task_category = targets.target_name
+            
+
     group by 1,2
 
 ),
@@ -77,17 +90,24 @@ expanded as (
     select 
         *,
 
-        sum(daily_minutes) over (
+        sum(daily_minutes_actual) over (
             partition by 
                 task_category,
                 date_part('week', date_day)
             order by date_day
-        ) as weekly_minutes,
+        ) as weekly_minutes_actual,
 
-        avg(daily_minutes) over (
+        sum(daily_minutes_target) over (
+            partition by 
+                task_category,
+                date_part('week', date_day)
+            order by date_day
+        ) as weekly_minutes_target,
+
+        avg(daily_minutes_actual) over (
             partition by task_category
             order by date_day rows between (7*8) preceding and current row                
-        ) as rolling_avg_daily_minutes
+        ) as rolling_avg_daily_minutes_actual
     
     from aggregated
 
