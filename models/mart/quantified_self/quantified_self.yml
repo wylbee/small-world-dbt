@@ -66,5 +66,19 @@ models:
               - date_day
               - metric_name
               - metric_type
-
+    - name: tf_time_tracks
+      description: Transaction fact table of persons tracking time spent on tasks.
+      columns:
+          - name: tracker_id
+            description: Primary Key
+            tests:
+                - unique
+                - not_null
+    - name: ps_daily_time_tracks
+      description: Periodic Snapshot fact table of daily time spent on tasks.
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - date_day
+              - task_category
               
