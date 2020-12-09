@@ -122,3 +122,4 @@ sources:
       - name: goodreads
       - name: nomie
       - name: toggl_api
+      - name: zettelkasten
