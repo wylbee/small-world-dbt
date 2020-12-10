@@ -81,4 +81,10 @@ models:
             combination_of_columns:
               - date_day
               - task_category
-              
+    - name: ps_daily_note_writes
+      description: Periodic Snapshot fact table of the number of atomic notes added to Zettlekasten by day.
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - date_day
+              - task_category
