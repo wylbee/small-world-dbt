@@ -106,7 +106,7 @@ expanded as (
 
         avg(daily_minutes_actual) over (
             partition by task_category
-            order by date_day rows between (7*8) preceding and current row                
+            order by date_day rows between (7*6) preceding and current row                
         ) as rolling_avg_daily_minutes_actual
     
     from aggregated
