@@ -89,7 +89,14 @@ models:
           tests:
             - unique
             - not_null
-
+    - name: stg_zettelkasten
+      description: Cleaned up snapshot data from Zettelkasten stored on Github. Snapshot begun on 2020-12-09. Each atom id refers to a note in the Zettelkasten, and the grain is a note x active period.
+      columns:
+        - name: atom_snapshot_record_id
+          description: Primary Key
+          tests:
+            - unique
+            - not_null
 
 sources:
   - name: raw_google_sheets_deep_work_tracker
