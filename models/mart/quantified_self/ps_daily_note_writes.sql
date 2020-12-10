@@ -6,15 +6,9 @@ dates as (
 
 ),
 
-tracks as (
+atoms as (
 
-    select * from {{ ref('tf_time_tracks') }}
-
-),
-
-tasks as (
-
-    select * from {{ ref('dim_tasks') }}
+    select * from {{ ref('stg_zettelkasten') }}
 
 ),
 
@@ -27,24 +21,12 @@ targets as (
 classified as (
 
     select
-        tracks.*,
-
-        case
-            when 
-                tasks.is_deep_work and 
-                tasks.is_professional
-                then 'deep_work_professional'
-            when 
-                tasks.is_deep_work and
-                tasks.is_okr 
-                then 'deep_work_okr'
-            when tasks.is_slope_learning then 'slope_learning'
-        end as task_category
+        atoms.*,
+        'atomic_notes' as task_category
     
-    from tracks
+    from atoms
 
-    left outer join tasks
-        on tracks.task_id = tasks.task_id
+    where is_first_completion = true
 
 ),
 
@@ -65,14 +47,14 @@ aggregated as (
 
     select 
         joined.*,
-        coalesce(sum(classified.duration_seconds/60.0),0) as daily_minutes_actual,
-        coalesce(max(targets.target_value),0) as daily_minutes_target
+        coalesce(count(atom_id),0) as daily_notes_actual,
+        coalesce(max(targets.target_value),0) as daily_notes_target
     
     from joined
 
     left outer join classified
         on 
-            joined.date_day = classified.date_ended::timestamp::date and 
+            joined.date_day = classified.override_dbt_updated_at::timestamp::date and 
             joined.task_category = classified.task_category
     
     left outer join targets
@@ -90,24 +72,24 @@ expanded as (
     select 
         *,
 
-        sum(daily_minutes_actual) over (
+        sum(daily_notes_actual) over (
             partition by 
                 task_category,
                 date_part('week', date_day)
             order by date_day
-        ) as weekly_minutes_actual,
+        ) as weekly_notes_actual,
 
-        sum(daily_minutes_target) over (
+        sum(daily_notes_target) over (
             partition by 
                 task_category,
                 date_part('week', date_day)
             order by date_day
-        ) as weekly_minutes_target,
+        ) as weekly_notes_target,
 
-        avg(daily_minutes_actual) over (
+        avg(daily_notes_actual) over (
             partition by task_category
             order by date_day rows between (7*6) preceding and current row                
-        ) as rolling_avg_daily_minutes_actual
+        ) as rolling_avg_daily_notes_actual
     
     from aggregated
 
