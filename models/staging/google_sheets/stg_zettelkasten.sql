@@ -41,6 +41,27 @@ historical_override as (
     
     from cleaned
 
+),
+
+add_bools as (
+
+    select
+        *,
+
+        row_number() over (
+            partition by atom_id
+            order by 
+                atom_status asc,
+                override_dbt_updated_at asc
+        ) = 1 as is_first_completion,
+
+        row_number() over(
+            partition by atom_id
+            order by override_dbt_updated_at desc
+        ) = 1 as is_current
+    
+    from historical_override
+
 )
 
-select * from historical_override
+select * from add_bools
