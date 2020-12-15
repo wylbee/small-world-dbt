@@ -21,7 +21,7 @@ toggl as (
 books_cleaned as (
 
     select 
-        tracker_id,
+        book_id as tracker_id,
         'book_read' as tracker_name,
         'general' as tracker_context,
         book_title as tracker_note,
