@@ -40,7 +40,13 @@ cleaned_api as (
 
         to_date(date_added, 'YYYY/MM/DD') as date_added,
 
-        to_date(read_at, 'YYYY/MM/DD') as date_read
+        to_date(
+            case 
+                when read_at = '' then null
+                else read_at
+            end, 
+            'YYYY/MM/DD'
+        ) as date_read
 
     from raw_api
 
