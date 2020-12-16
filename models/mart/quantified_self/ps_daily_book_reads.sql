@@ -6,9 +6,9 @@ dates as (
 
 ),
 
-atoms as (
+books as (
 
-    select * from {{ ref('stg_zettelkasten') }}
+    select * from {{ ref('stg_goodreads') }}
 
 ),
 
@@ -21,12 +21,10 @@ targets as (
 classified as (
 
     select
-        atoms.*,
-        'atomic_notes' as task_category
+        books.*,
+        'books_read' as task_category
     
-    from atoms
-
-    where is_first_completion = true
+    from books
 
 ),
 
@@ -47,14 +45,14 @@ aggregated as (
 
     select 
         joined.*,
-        coalesce(count(atom_id),0) as daily_notes_actual,
-        coalesce(max(targets.target_value),0) as daily_notes_target
+        coalesce(count(book_id),0) as daily_books_actual,
+        coalesce(max(targets.target_value),0) as daily_books_target
     
     from joined
 
     left outer join classified
         on 
-            joined.date_day = classified.override_dbt_updated_at::timestamp::date and 
+            joined.date_day = classified.date_read and 
             joined.task_category = classified.task_category
     
     left outer join targets
@@ -72,26 +70,26 @@ expanded as (
     select 
         *,
 
-        sum(daily_notes_actual) over (
+        sum(daily_books_actual) over (
             partition by 
                 task_category,
                 date_part('year', date_day),
                 date_part('week', date_day)
             order by date_day
-        ) as weekly_notes_actual,
+        ) as weekly_books_actual,
 
-        sum(daily_notes_target) over (
+        sum(daily_books_target) over (
             partition by 
                 task_category,
                 date_part('year', date_day),
                 date_part('week', date_day)
             order by date_day
-        ) as weekly_notes_target,
+        ) as weekly_books_target,
 
-        avg(daily_notes_actual) over (
+        avg(daily_books_actual) over (
             partition by task_category
             order by date_day rows between (7*6) preceding and current row                
-        ) as rolling_avg_daily_notes_actual
+        ) as rolling_avg_daily_books_actual
     
     from aggregated
 

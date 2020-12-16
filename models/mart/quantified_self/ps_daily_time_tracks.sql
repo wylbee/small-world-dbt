@@ -93,6 +93,7 @@ expanded as (
         sum(daily_minutes_actual) over (
             partition by 
                 task_category,
+                date_part('year', date_day),
                 date_part('week', date_day)
             order by date_day
         ) as weekly_minutes_actual,
@@ -100,6 +101,7 @@ expanded as (
         sum(daily_minutes_target) over (
             partition by 
                 task_category,
+                date_part('year', date_day),
                 date_part('week', date_day)
             order by date_day
         ) as weekly_minutes_target,
