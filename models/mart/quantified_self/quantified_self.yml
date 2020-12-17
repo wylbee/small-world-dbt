@@ -88,3 +88,10 @@ models:
             combination_of_columns:
               - date_day
               - task_category
+    - name: ps_daily_book_reads
+      description: Periodic Snapshot fact table of the number of books read per day.
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - date_day
+              - task_category

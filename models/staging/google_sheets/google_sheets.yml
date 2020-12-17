@@ -82,9 +82,9 @@ models:
             - unique
             - not_null
     - name: stg_goodreads
-      description: Raw reading data from Goodreads loaded by google sheet.
+      description: Raw reading data from Goodreads loaded by a script that reads off my profile rss (captures last 100 books). Seeded with a historical export of entire library.
       columns:
-        - name: tracker_id
+        - name: book_id
           description: Primary Key
           tests:
             - unique
@@ -130,3 +130,4 @@ sources:
       - name: nomie
       - name: toggl_api
       - name: zettelkasten
+      - name: goodreads_api
