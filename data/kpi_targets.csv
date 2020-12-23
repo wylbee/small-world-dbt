@@ -1,6 +1,8 @@
 ﻿target_id,target_name,target_value,target_unit,active_from,active_to
 1,slope_learning,42.85714286,minutes/day,2020-11-01,
-2,deep_work_okr,90,minutes/day,2020-11-01,
-3,deep_work_professional,102.8571429,minutes/day,2020-11-01,
+2,deep_work_okr,90,minutes/day,2020-11-01,2020-12-22
+3,deep_work_professional,102.8571429,minutes/day,2020-11-01,2020-12-22
 4,atomic_notes,1,notes/day,2020-11-01,
 5,books_read,0.1586212155875848,books/day,2020-11-01,
+2,deep_work_okr,42.85714286,minutes/day,2020-12-23,
+3,deep_work_professional,128.5714285714286,minutes/day,2020-12-23,
