@@ -97,6 +97,14 @@ models:
           tests:
             - unique
             - not_null
+    - name: stg_oura
+      description: Raw data from Oura loaded via api.
+      columns:
+        - name: oura_id
+          description: Primary Key
+          tests:
+            - unique
+            - not_null
 
 sources:
   - name: raw_google_sheets_deep_work_tracker
@@ -131,3 +139,4 @@ sources:
       - name: toggl_api
       - name: zettelkasten
       - name: goodreads_api
+      - name: oura_api
