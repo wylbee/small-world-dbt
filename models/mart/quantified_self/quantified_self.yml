@@ -95,3 +95,10 @@ models:
             combination_of_columns:
               - date_day
               - task_category
+    - name: ps_daily_health_tracks
+      description: Periodic Snapshot fact table of daily health metrics.
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - date_day
+              - metric_name
